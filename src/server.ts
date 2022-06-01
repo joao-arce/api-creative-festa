@@ -23,6 +23,6 @@ server.use((req: Request, res: Response) => {
 // const port = process.env.PORT || 5000;
 const port = 5000;
 
-server.listen(port, () => {
+server.listen(process.env.PORT || port, () => {
   console.log(`Server running at ${port} `);
 });
