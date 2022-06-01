@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev-start": "nodemon -e ts,json src/server.ts",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "postinstall": "tsc"
   },
   "license": "MIT",
   "dependencies": {
