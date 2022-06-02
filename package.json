@@ -1,7 +1,7 @@
 {
   "name": "api-creative-festa",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
     "start": "node build/server.js",
     "postinstall": "tsc"
