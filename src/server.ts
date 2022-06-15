@@ -24,5 +24,5 @@ server.use((req: Request, res: Response) => {
 const port = 5000;
 
 server.listen(process.env.PORT || port, () => {
-  console.log(`Server running at ${port} `);
+  console.log(`Server running at ${port} , e chegando no banco `);
 });
