@@ -63,9 +63,9 @@ model Ticket {
   description  String  @db.VarChar
   adult_price  Int?    @default(0)
   kid_price    Int?    @default(0)
+  combo_price  Int?    @default(0)
   initial_date String  @db.VarChar
   final_date   String? @db.VarChar
-  combo_price  Int?    @default(0)
   orders       Order[]
 
   @@map("tickets")

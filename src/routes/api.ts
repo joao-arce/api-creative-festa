@@ -25,6 +25,7 @@ router.get(
 router.get('/ticket', TicketController.all);
 router.get('/ticket/:id', TicketController.getById);
 router.post('/ticket', TicketController.create);
+router.put('/clorseticket/:id', TicketController.close);
 
 // ENDPOINT USER
 router.get('/user', UserController.all);

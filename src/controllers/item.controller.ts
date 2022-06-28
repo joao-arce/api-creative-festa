@@ -112,7 +112,7 @@ export const createAndUpdate = async (req: Request, res: Response) => {
   const { id_order } = newItems[0];
   const status = 'aberta';
 
-  console.log('createAndUpdate');
+  // console.log('createAndUpdate');
   // console.log('newItems ', newItems);
   // console.log('id_order ', id_order);
   // console.log('status ', status);

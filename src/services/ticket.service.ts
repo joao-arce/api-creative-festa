@@ -1,12 +1,14 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 type TicketProps = {
   description: string;
-  adult_price: number;
-  kid_price: number;
+  adult_price?: number;
+  kid_price?: number;
+  combo_price?: number;
   initial_date: string;
+  final_date?: string;
 };
 
 export const TicketService = {
@@ -25,5 +27,27 @@ export const TicketService = {
   create: async (newTicket: TicketProps) => {
     const ticket = await prisma.ticket.create({ data: newTicket });
     return ticket;
+  },
+
+  close: async (id: number, final_date: string) => {
+    try {
+      const updateTicket = await prisma.ticket.update({
+        where: {
+          id: id,
+        },
+        data: {
+          final_date: final_date,
+        },
+      });
+
+      return updateTicket;
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        if (e.code === 'P2025') {
+          console.log(e.message);
+        }
+      }
+      return e;
+    }
   },
 };
