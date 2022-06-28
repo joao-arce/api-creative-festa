@@ -60,9 +60,9 @@ model Order {
 
 model Ticket {
   id           Int     @id(map: "tickets_pk") @default(autoincrement())
-  description  String  @db.VarChar
-  adult_price  Int?    @default(0)
-  kid_price    Int?    @default(0)
+  description  String? @db.VarChar
+  adult_price  Int?
+  kid_price    Int?
   initial_date String  @db.VarChar
   final_date   String? @db.VarChar
   combo_price  Int?    @default(0)
@@ -81,10 +81,4 @@ model User {
   items     Item[]
 
   @@map("users")
-}
-
-model testes {
-  id           Int    @id(map: "teste_pk") @default(autoincrement())
-  description  String @db.VarChar
-  day_off_date String @db.VarChar
 }
