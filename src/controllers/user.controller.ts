@@ -33,3 +33,9 @@ export const create = async (req: Request, res: Response) => {
     res.json({ error: 'Dados obrigatórios não preenchidos.' });
   }
 };
+
+export const login = async (req: Request, res: Response) => {
+  const { user_name, password } = req.params;
+  const user = await UserService.login(user_name, password);
+  return res.json({ user });
+};

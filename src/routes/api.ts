@@ -6,6 +6,7 @@ import * as TicketController from '../controllers/ticket.controller';
 import * as UserController from '../controllers/user.controller';
 import * as OrderController from '../controllers/order.controller';
 import * as ItemController from '../controllers/item.controller';
+import * as CashierController from '../controllers/cashier.controller';
 
 const router = Router();
 
@@ -29,6 +30,7 @@ router.put('/clorseticket/:id', TicketController.close);
 
 // ENDPOINT USER
 router.get('/user', UserController.all);
+router.get('/user/:username/:password', UserController.login);
 router.post('/user', UserController.create);
 
 // ENDPOINT ORDER
@@ -46,6 +48,7 @@ router.get(
   OrderController.getNotStatusByNumberAndDate
 );
 router.get('/order/parcial/:number/:date', OrderController.getParcial);
+router.get('/orderitem/:date', OrderController.getOrderItemByDate);
 
 router.post('/order', OrderController.create);
 router.put('/order/:id', OrderController.update);
@@ -57,5 +60,10 @@ router.post('/item', ItemController.create);
 router.post('/item/createMany', ItemController.createMany);
 router.post('/item/createAndUpdate', ItemController.createAndUpdate);
 router.put('/item/updateMany/:id_order', ItemController.updateMany);
+
+// ENDPOINT CASHIER
+router.get('/cashier/:date', CashierController.getByDate);
+router.post('/cashier', CashierController.create);
+router.put('/cashier/close', CashierController.close);
 
 export default router;

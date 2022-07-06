@@ -30,17 +30,6 @@ export const create = async (req: Request, res: Response) => {
   const { description, adult_price, kid_price, combo_price, initial_date } =
     req.body;
 
-  // console.log('adult_price ', adult_price);
-  // console.log('kid_price ', kid_price);
-  // console.log('combo_price ', combo_price);
-
-  // const x = getTicketValue(adult_price);
-  // const y = getTicketValue(kid_price);
-  // const z = getTicketValue(combo_price);
-  // console.log('x ', x);
-  // console.log('y ', y);
-  // console.log('z ', z);
-
   // res.json({ message: 'estamos testando' });
 
   if (validateFilds(req)) {

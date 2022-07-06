@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 
 import { ItemService } from '../services/item.service';
-import { OrderService } from '../services/order.service';
 
 const validateFilds = (req: Request) => {
   const { service_time, quantity, status, id_user, id_order, id_product } =
@@ -39,33 +38,6 @@ export const create = async (req: Request, res: Response) => {
 };
 
 export const createMany = async (req: Request, res: Response) => {
-  // const objItems = [
-  //   {
-  //     service_time: '09:12',
-  //     quantity: 1,
-  //     status: 'aberto',
-  //     id_user: 3,
-  //     id_order: 2,
-  //     id_product: 4,
-  //   },
-  //   {
-  //     service_time: '09:14',
-  //     quantity: 12,
-  //     status: 'aberto',
-  //     id_user: 3,
-  //     id_order: 2,
-  //     id_product: 4,
-  //   },
-  //   {
-  //     service_time: '10:01',
-  //     quantity: 10,
-  //     status: 'aberto',
-  //     id_user: 3,
-  //     id_order: 2,
-  //     id_product: 4,
-  //   },
-  // ];
-
   type NewItem = {
     service_time: string;
     quantity: number;

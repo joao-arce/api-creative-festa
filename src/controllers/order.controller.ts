@@ -11,16 +11,17 @@ type OrderProps = {
   kid_qtd: number;
   status: string;
   id_ticket: number;
+  id_cashier: number;
 };
 const CRIADA = 'criada';
 const ABERTA = 'aberta';
 const FECHADA = 'fechada';
 const ALL = 'all';
 
-const validateFilds = (req: Request) => {
-  const { number, date, id_ticket } = req.body;
+const validateFields = (req: Request) => {
+  const { number, date, id_ticket, id_cashier } = req.body;
 
-  if (number && date && id_ticket) {
+  if (number && date && id_ticket && id_cashier) {
     return true;
   }
 
@@ -51,10 +52,18 @@ export const all = async (req: Request, res: Response) => {
 };
 
 export const create = async (req: Request, res: Response) => {
-  const { number, client_name, date, adult_qtd, kid_qtd, status, id_ticket } =
-    req.body;
+  const {
+    number,
+    client_name,
+    date,
+    adult_qtd,
+    kid_qtd,
+    status,
+    id_ticket,
+    id_cashier,
+  } = req.body;
   // console.log(req.body);
-  if (validateFilds(req)) {
+  if (validateFields(req)) {
     const isUnique = await isOrderUnique(+number, date);
     if (isUnique) {
       const order = await OrderService.create({
@@ -65,6 +74,7 @@ export const create = async (req: Request, res: Response) => {
         kid_qtd: kid_qtd === undefined ? 0 : parseInt(kid_qtd),
         status: status === undefined ? 'criada' : status,
         id_ticket: parseInt(id_ticket),
+        id_cashier: parseInt(id_cashier),
       });
       res.json({ order });
     } else {
@@ -143,7 +153,7 @@ export const getByStatusAndDate = async (req: Request, res: Response) => {
 
   const typeStatus = getStatus(status);
 
-  const orders = result.filter((order) => {
+  const orders = result.filter((order: { status: string }) => {
     if (typeStatus !== ALL) {
       if (order.status === typeStatus) {
         return order;
@@ -160,5 +170,11 @@ export const getOrderWithOpenItems = async (req: Request, res: Response) => {
   const { date } = req.params;
   // console.log('getOrderWithOpenItems ', date);
   const orders = await OrderService.getOrderWithOpenItems(date);
+  return res.json({ orders });
+};
+
+export const getOrderItemByDate = async (req: Request, res: Response) => {
+  const { date } = req.params;
+  const orders = await OrderService.getOrderItemByDate(date);
   return res.json({ orders });
 };

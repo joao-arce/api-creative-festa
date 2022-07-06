@@ -17,8 +17,17 @@ export const UserService = {
   },
 
   create: async (newUser: UserProps) => {
-    //   const user = await prisma.user.create({ data: newUser });
+    const user = await prisma.user.create({ data: newUser });
     //   return user;
     return await newUser;
+  },
+  login: async (user_name: string, password: string) => {
+    const user = await prisma.user.findFirst({
+      where: {
+        user_name,
+        password,
+      },
+    });
+    return user;
   },
 };

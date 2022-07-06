@@ -10,6 +10,7 @@ type OrderProps = {
   kid_qtd: number;
   status: string;
   id_ticket: number;
+  id_cashier: number;
 };
 
 export const OrderService = {
@@ -116,6 +117,24 @@ export const OrderService = {
     });
     return orders;
   },
+
+  getOrderItemByDate: async (date: string) => {
+    const orders = await prisma.order.findMany({
+      where: {
+        date,
+      },
+      include: {
+        ticket: true,
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
+    return orders;
+  },
+
   getOrderWithOpenItems: async (date: string) => {
     const orders = await prisma.order.findMany({
       where: {
