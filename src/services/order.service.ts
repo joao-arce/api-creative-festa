@@ -131,6 +131,9 @@ export const OrderService = {
           },
         },
       },
+      orderBy: {
+        id_ticket: 'asc',
+      },
     });
     return orders;
   },

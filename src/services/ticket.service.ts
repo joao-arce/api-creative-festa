@@ -13,8 +13,12 @@ type TicketProps = {
 
 export const TicketService = {
   all: async () => {
-    const tickets = await prisma.ticket.findMany();
-    return tickets;
+    try {
+      const tickets = await prisma.ticket.findMany();
+      return tickets;
+    } catch (error) {
+      return error;
+    }
   },
   getById: async (id: number) => {
     const ticket = await prisma.ticket.findUnique({
@@ -25,8 +29,12 @@ export const TicketService = {
     return ticket;
   },
   create: async (newTicket: TicketProps) => {
-    const ticket = await prisma.ticket.create({ data: newTicket });
-    return ticket;
+    try {
+      const ticket = await prisma.ticket.create({ data: newTicket });
+      return ticket;
+    } catch (error) {
+      return error;
+    }
   },
 
   close: async (id: number, final_date: string) => {

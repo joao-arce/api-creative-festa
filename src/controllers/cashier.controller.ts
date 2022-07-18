@@ -106,6 +106,9 @@ export const close = async (req: Request, res: Response) => {
 
 export const getByDate = async (req: Request, res: Response) => {
   const { date } = req.params;
+  // console.log('VAmos ver ');
+  // console.log('date ', date);
   const cashier = await CashierService.getByDate(date);
+  // console.log('cashier', cashier);
   res.json({ cashier });
 };

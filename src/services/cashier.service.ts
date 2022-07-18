@@ -52,11 +52,19 @@ export const CashierService = {
   },
 
   getByDate: async (date: string) => {
-    const cashier = await prisma.cashier.findFirst({
-      where: {
-        open_date: date,
-      },
-    });
-    return cashier;
+    try {
+      // console.log('ze 01');
+      const cashier = await prisma.cashier.findFirst({
+        where: {
+          open_date: date,
+        },
+      });
+      // console.log('ze 02');
+
+      return cashier;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   },
 };
